@@ -1,0 +1,159 @@
+:root {
+  --bg: #05060a;
+  --fg: #e8eef6;
+  --muted: #8b9ab0;
+  --accent: #7cc7ff;
+  --panel: rgba(12, 18, 28, 0.72);
+  --border: rgba(124, 199, 255, 0.28);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: system-ui, 'Segoe UI', 'Hiragino Sans', 'Noto Sans JP', sans-serif;
+  overflow: hidden;
+  /* 見回しドラッグ中に写真名などが範囲選択されるのを防ぐ */
+  user-select: none;
+}
+
+.app {
+  position: fixed;
+  inset: 0;
+}
+
+canvas {
+  display: block;
+  /* ドラッグで見回す操作を、ブラウザ既定のパン/スクロールに奪われないようにする */
+  touch-action: none;
+}
+
+/* オーバーレイは既定でクリックを透過させ、3D 空間の操作を邪魔しない。
+   触ってよい要素（ボタン）だけ pointer-events を戻す。 */
+.toolbar,
+.statusbar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 20px;
+  pointer-events: none;
+}
+
+.toolbar {
+  top: 0;
+  justify-content: space-between;
+  background: linear-gradient(180deg, rgba(5, 6, 10, 0.85), transparent);
+}
+
+.statusbar {
+  bottom: 0;
+  justify-content: center;
+  background: linear-gradient(0deg, rgba(5, 6, 10, 0.85), transparent);
+}
+
+.folder {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  min-width: 0;
+}
+
+.folder-name {
+  font-size: 15px;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.count,
+.hint {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.selected-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+button {
+  pointer-events: auto;
+  padding: 8px 16px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--panel);
+  color: var(--fg);
+  font-size: 13px;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+button:hover:not(:disabled) {
+  border-color: var(--accent);
+  background: rgba(124, 199, 255, 0.16);
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+button.primary {
+  padding: 12px 28px;
+  font-size: 15px;
+}
+
+.welcome {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  text-align: center;
+  /* 中央の案内は radial-gradient で「空間の中に浮いている」見た目に寄せる */
+  background: radial-gradient(circle at 50% 45%, rgba(124, 199, 255, 0.09), var(--bg) 62%);
+}
+
+.welcome h1 {
+  margin: 0;
+  font-size: 34px;
+  letter-spacing: 0.06em;
+}
+
+.welcome p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.error {
+  color: #ff9d9d;
+  font-size: 13px;
+}
+
+.error.floating {
+  position: absolute;
+  top: 62px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 8px 14px;
+  border: 1px solid rgba(255, 157, 157, 0.4);
+  border-radius: 8px;
+  background: var(--panel);
+}
