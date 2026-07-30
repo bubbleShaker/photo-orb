@@ -1,0 +1,6 @@
+node_modules/
+out/
+dist/
+# 検証用に生成した写真とスクリーンショット（成果物ではない）
+.sample-photos/
+scratch/
