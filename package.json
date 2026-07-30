@@ -1,0 +1,30 @@
+{
+  "name": "photo-orb",
+  "version": "0.1.0",
+  "description": "3D空間に浮かぶ写真から1枚を選ぶ、自作の写真プレビューアプリ (Electron + React + Three.js)",
+  "license": "MIT",
+  "author": "bubbleShaker",
+  "main": "./out/main/index.js",
+  "scripts": {
+    "dev": "electron-vite dev",
+    "build": "electron-vite build",
+    "start": "electron-vite preview",
+    "test": "node --test test/*.test.mjs",
+    "check:protocol": "electron scripts/check-photo-protocol.js",
+    "check:scene": "electron scripts/smoke-scene.js",
+    "check": "npm test && npm run check:protocol"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^5.2.0",
+    "electron": "^43.2.0",
+    "electron-vite": "^5.0.0",
+    "vite": "^7.3.6"
+  },
+  "dependencies": {
+    "@react-three/drei": "^10.7.7",
+    "@react-three/fiber": "^9.6.1",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "three": "^0.185.1"
+  }
+}
